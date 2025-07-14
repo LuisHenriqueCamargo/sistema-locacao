@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <title>Criar Evento</title>
+  <link rel="stylesheet" href="/static/style.css" />
+  <style>
+    form {
+      max-width: 600px;
+      margin: 2rem auto;
+      padding: 2rem;
+      background-color: #fff;
+      border-radius: 12px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    }
+    form input, form textarea, form select {
+      width: 100%;
+      padding: 0.5rem;
+      margin-bottom: 1rem;
+      border-radius: 8px;
+      border: 1px solid #ccc;
+    }
+    form button {
+      padding: 0.7rem 1.5rem;
+      margin-right: 1rem;
+      border: none;
+      border-radius: 8px;
+      background-color: #0066cc;
+      color: white;
+      cursor: pointer;
+    }
+    form button.cancelar {
+      background-color: #aaa;
+    }
+  </style>
+</head>
+<body>
+  <form action="/salvar_evento" method="post">
+    <h2>Criar Novo Evento</h2>
+    <input type="text" name="nome_evento" placeholder="Nome do Evento" required />
+    <input type="text" name="cliente_final" placeholder="Cliente Final" required />
+    <input type="date" name="data_inicio" required />
+    <input type="date" name="data_fim" required />
+    <input type="text" name="local_evento" placeholder="Local do Evento" required />
+    <input type="text" name="responsavel_evento" placeholder="Responsável pelo Evento" required />
+    <select name="status" required>
+      <option value="">Status</option>
+      <option value="confirmado">Confirmado</option>
+      <option value="pendente">Pendente</option>
+      <option value="cancelado">Cancelado</option>
+    </select>
+    <textarea name="observacoes" placeholder="Observações"></textarea>
+
+    <!-- Campos ocultos necessários para salvar -->
+    <input type="hidden" name="nome" value="{{ nome }}" />
+    <input type="hidden" name="email" value="{{ email }}" />
+    <input type="hidden" name="perfil" value="{{ perfil }}" />
+
+    <button type="submit">Salvar</button>
+    <a href="/dashboard?nome={{ nome }}&email={{ email }}&perfil={{ perfil }}">
+      <button type="button" class="cancelar">Cancelar</button>
+    </a>
+  </form>
+</body>
+</html>

@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <title>Login - Sistema de Locação</title>
+  <link rel="stylesheet" href="/static/style.css" />
+</head>
+<body class="login-page">
+  <div class="login-container">
+    <h1>🔐 Sistema de Locação</h1>
+    <form action="/login" method="post">
+      <input type="email" name="email" placeholder="Seu e-mail" required />
+      <input type="password" name="senha" placeholder="Sua senha" required />
+      <button type="submit">Entrar</button>
+      {% if erro %}
+        <p class="erro">{{ erro }}</p>
+      {% endif %}
+    </form>
+  </div>
+</body>
+</html>

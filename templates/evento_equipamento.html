@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <title>Relacionar Equipamento ao Evento</title>
+  <link rel="stylesheet" href="/static/style.css" />
+  <style>
+    form {
+      max-width: 600px; margin: 2rem auto; padding: 2rem;
+      background-color: #fff; border-radius: 12px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    }
+    form input, form select {
+      width: 100%; padding: 0.5rem; margin-bottom: 1rem;
+      border-radius: 8px; border: 1px solid #ccc;
+    }
+    form button {
+      padding: 0.7rem 1.5rem; margin-right: 1rem;
+      border: none; border-radius: 8px;
+      background-color: #0066cc; color: white; cursor: pointer;
+    }
+    form button.cancelar {
+      background-color: #aaa;
+    }
+  </style>
+</head>
+<body>
+  <form action="/evento_equipamento" method="post">
+    <h2>Relacionar Equipamento ao Evento</h2>
+    <select name="id_evento" required>
+      <option value="">Selecione o Evento</option>
+      {% for evento in eventos %}
+      <option value="{{ evento['ID'] }}">{{ evento['ID'] }} - {{ evento['nome_evento'] }}</option>
+      {% endfor %}
+    </select>
+    <select name="id_equipamento" required>
+      <option value="">Selecione o Equipamento</option>
+      {% for eq in equipamentos %}
+      <option value="{{ eq['id_equipamento'] }}">{{ eq['id_equipamento'] }} - {{ eq['nome_equip'] }}</option>
+      {% endfor %}
+    </select>
+    <input type="number" name="quantidade_padrao" placeholder="Quantidade Padrão" required />
+
+    <input type="hidden" name="nome" value="{{ nome }}" />
+    <input type="hidden" name="email" value="{{ email }}" />
+    <input type="hidden" name="perfil" value="{{ perfil }}" />
+
+    <button type="submit">Salvar</button>
+    <a href="/dashboard?nome={{ nome }}&email={{ email }}&perfil={{ perfil }}">
+      <button type="button" class="cancelar">Cancelar</button>
+    </a>
+  </form>
+</body>
+</html>

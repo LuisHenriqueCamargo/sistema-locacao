@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <title>Picking</title>
+  <link rel="stylesheet" href="/static/style.css" />
+  <style>
+    body {
+      background-color: #f4f4f4;
+      font-family: Arial, sans-serif;
+    }
+    form {
+      max-width: 600px;
+      margin: 2rem auto;
+      padding: 2rem;
+      background-color: #ffffff;
+      border-radius: 12px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    }
+    input, select {
+      width: 60%;
+      padding: 0.5rem;
+      margin-bottom: 1rem;
+      border-radius: 8px;
+      border: 1px solid #ccc;
+      color: #000 !important;
+      background-color: #fff !important;
+      font-weight: 500;
+    }
+    select option {
+      color: #000 !important;
+      background-color: #fff !important;
+    }
+    select:focus {
+      outline: none;
+      border: 1px solid #0066cc;
+      box-shadow: 0 0 4px rgba(0, 102, 204, 0.5);
+    }
+    button {
+      padding: 0.7rem 1.5rem;
+      margin-right: 1rem;
+      border: none;
+      border-radius: 8px;
+      background-color: #0066cc;
+      color: white;
+      cursor: pointer;
+    }
+    button.cancelar {
+      background-color: #aaa;
+    }
+  </style>
+</head>
+<body>
+  <form action="/picking/salvar" method="post">
+    <h2>Picking de Equipamento</h2>
+
+    <label for="evento">Evento:</label>
+    <select name="id_evento" id="evento" required>
+      <option value="">Selecione o Evento</option>
+      {% for evento in eventos %}
+        <option value="{{ evento['ID'] }}">{{ evento['Nome do Evento'] }}</option>
+      {% endfor %}
+    </select>
+
+    <label for="equipamento">Equipamento:</label>
+    <select name="id_equipamento" id="equipamento" required>
+      <option value="">Selecione o Equipamento</option>
+      {% for eqp in equipamentos %}
+        <option value="{{ eqp['ID'] }}">{{ eqp['Nome do Equipamento'] }}</option>
+      {% endfor %}
+    </select>
+
+    <input type="number" name="quantidade_separar" placeholder="Quantidade a Separar" required />
+    <input type="date" name="data_envio" required />
+
+    <label>Status:</label>
+    <select name="status" required>
+      <option value="">Status</option>
+      <option value="pendente">Pendente</option>
+      <option value="enviado">Enviado</option>
+    </select>
+
+    <input type="text" name="responsavel_envio" placeholder="Responsável pelo Envio" required />
+
+    <!-- Campos ocultos -->
+    <input type="hidden" name="nome" value="{{ nome }}" />
+    <input type="hidden" name="email" value="{{ email }}" />
+    <input type="hidden" name="perfil" value="{{ perfil }}" />
+
+    <button type="submit">Salvar</button>
+    <a href="/dashboard?nome={{ nome }}&email={{ email }}&perfil={{ perfil }}">
+      <button type="button" class="cancelar">Cancelar</button>
+    </a>
+
+    {% if mensagem %}
+      <p style="color: green;">{{ mensagem }}</p>
+    {% endif %}
+  </form>
+</body>
+</html>

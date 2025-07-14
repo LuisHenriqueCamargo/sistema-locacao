@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <title>Cadastrar Equipamento</title>
+  <link rel="stylesheet" href="/static/style.css" />
+  <style>
+    form {
+      max-width: 600px;
+      margin: 2rem auto;
+      padding: 2rem;
+      background-color: #fff;
+      border-radius: 12px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    }
+    input, textarea, select {
+      width: 100%;
+      padding: 0.5rem;
+      margin-bottom: 1rem;
+      border-radius: 8px;
+      border: 1px solid #ccc;
+    }
+    button {
+      padding: 0.7rem 1.5rem;
+      margin-right: 1rem;
+      border: none;
+      border-radius: 8px;
+      background-color: #0066cc;
+      color: white;
+      cursor: pointer;
+    }
+    button.cancelar {
+      background-color: #aaa;
+    }
+  </style>
+</head>
+<body>
+  <form action="/equipamento/salvar" method="post">
+    <h2>Cadastrar Equipamento</h2>
+
+    <input type="text" name="nome_equip" placeholder="Nome do Equipamento" required />
+    <input type="text" name="tipo" placeholder="Tipo de Equipamento" required />
+    <textarea name="descricao" placeholder="Descrição do Equipamento" rows="3"></textarea>
+    <input type="number" name="quantidade_total" placeholder="Quantidade Total" required />
+    <select name="status" required>
+      <option value="">Status</option>
+      <option value="disponível">Disponível</option>
+      <option value="em uso">Em Uso</option>
+      <option value="manutenção">Manutenção</option>
+    </select>
+    <input type="text" name="qr_code" placeholder="Código QR (opcional)" />
+    <input type="text" name="localizacao" placeholder="Localização" required />
+
+    <!-- Campos ocultos -->
+    <input type="hidden" name="nome" value="{{ nome }}" />
+    <input type="hidden" name="email" value="{{ email }}" />
+    <input type="hidden" name="perfil" value="{{ perfil }}" />
+
+    <button type="submit">Salvar</button>
+    <a href="/dashboard?nome={{ nome }}&email={{ email }}&perfil={{ perfil }}">
+      <button type="button" class="cancelar">Cancelar</button>
+    </a>
+
+    {% if mensagem %}
+      <p style="color: green;">{{ mensagem }}</p>
+    {% endif %}
+  </form>
+</body>
+</html>

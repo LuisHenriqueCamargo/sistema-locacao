@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <title>Dashboard - Sistema de Locação</title>
+  <link rel="stylesheet" href="/static/style.css" />
+  <style>
+    body, html {
+      margin: 0; padding: 0; height: 100%;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background-color: #f4f6fa;
+    }
+    .dashboard {
+      display: flex;
+      height: 100vh;
+      overflow: hidden;
+    }
+    .sidebar {
+      width: 260px;
+      background-color: #002855;
+      color: white;
+      padding: 20px;
+      box-sizing: border-box;
+      display: flex;
+      flex-direction: column;
+      overflow-y: auto;
+    }
+    .sidebar::-webkit-scrollbar {
+      width: 6px;
+    }
+    .sidebar::-webkit-scrollbar-thumb {
+      background-color: #888;
+      border-radius: 10px;
+    }
+    .sidebar h2 {
+      color: #ffcc00;
+      margin-bottom: 10px;
+      font-weight: 700;
+      font-size: 1.5rem;
+    }
+    .sidebar p {
+      font-size: 1rem;
+      margin-bottom: 20px;
+      font-weight: 500;
+    }
+    .sidebar nav ul {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+    }
+    .sidebar nav ul li {
+      margin-bottom: 10px;
+    }
+    .sidebar nav ul li a {
+      color: white;
+      text-decoration: none;
+      font-weight: 600;
+      font-size: 1.05rem;
+      display: block;
+      padding: 10px 12px;
+      border-radius: 6px;
+      transition: background-color 0.3s ease;
+    }
+    .sidebar nav ul li a:hover {
+      background-color: #004080;
+    }
+    .main-content {
+      flex-grow: 1;
+      padding: 40px;
+      overflow-y: auto;
+    }
+    .main-content h1 {
+      color: #002855;
+      margin-bottom: 30px;
+      font-weight: 700;
+      font-size: 2.2rem;
+    }
+    .cards-container {
+      display: flex;
+      gap: 20px;
+      flex-wrap: wrap;
+    }
+    .card {
+      background-color: #e6f0ff;
+      color: #003366;
+      padding: 20px;
+      border-radius: 12px;
+      box-shadow: 2px 2px 6px rgba(0, 0, 0, 0.1);
+      min-width: 200px;
+      flex: 1;
+      font-weight: 600;
+      text-align: center;
+      transition: transform 0.2s, box-shadow 0.2s;
+      cursor: default;
+      user-select: none;
+    }
+    .card:hover {
+      transform: translateY(-5px);
+      box-shadow: 4px 4px 12px rgba(0, 0, 0, 0.15);
+      background-color: #dceeff;
+    }
+    .info-text {
+      margin-top: 25px;
+      font-size: 1rem;
+      color: #333;
+      font-weight: 500;
+    }
+  </style>
+</head>
+<body>
+  <div class="dashboard">
+    <aside class="sidebar">
+      <h2>Sistema de Locação</h2>
+      <p>Olá, {{ nome }}</p>
+      <nav>
+        <ul>
+          <li><a href="/dashboard?nome={{ nome }}&email={{ email }}&perfil={{ perfil }}">🏠 Início</a></li>
+
+          {% if perfil == "admin" %}
+            <li><a href="/criar_evento?nome={{ nome }}&email={{ email }}&perfil={{ perfil }}">📅 Criar Evento</a></li>
+            <li><a href="/equipamento?nome={{ nome }}&email={{ email }}&perfil={{ perfil }}">📦 Equipamentos</a></li>
+            <li><a href="/picking?nome={{ nome }}&email={{ email }}&perfil={{ perfil }}">📋 Picking</a></li>
+            <li><a href="/evento_equipamento?nome={{ nome }}&email={{ email }}&perfil={{ perfil }}">⚙️ Equipamentos Padrão</a></li>
+            <li><a href="/checklist?nome={{ nome }}&email={{ email }}&perfil={{ perfil }}">✅ Checklist</a></li>
+            <li><a href="/manutencao?nome={{ nome }}&email={{ email }}&perfil={{ perfil }}">🔧 Manutenção</a></li>
+            <li><a href="/clientes_parceiros?nome={{ nome }}&email={{ email }}&perfil={{ perfil }}">👥 Clientes Parceiros</a></li>
+            <li><a href="/contratos_fechados?nome={{ nome }}&email={{ email }}&perfil={{ perfil }}">📑 Contratos Fechados</a></li>
+            <li><a href="/funcionarios?nome={{ nome }}&email={{ email }}&perfil={{ perfil }}">🧑‍💼 Funcionários</a></li>
+            <li><a href="/financeiro?nome={{ nome }}&email={{ email }}&perfil={{ perfil }}">💰 Financeiro</a></li>
+            <li><a href="/frota?nome={{ nome }}&email={{ email }}&perfil={{ perfil }}">🚚 Minha Frota</a></li>
+            <li><a href="/frota_evento?nome={{ nome }}&email={{ email }}&perfil={{ perfil }}">🛣️ Frota Evento</a></li>
+          
+            <li><a href="/inventario?nome={{ nome }}&email={{ email }}&perfil={{ perfil }}">📦 Inventário</a></li>
+            <li><a href="/bd?nome={{ nome }}&email={{ email }}&perfil={{ perfil }}">📊 Banco de Dados (ETL)</a></li>
+
+          {% elif perfil == "operacional" %}
+
+            <li><a href="/equipamento?nome={{ nome }}&email={{ email }}&perfil={{ perfil }}">📦 Equipamentos</a></li>
+
+            <li><a href="/evento_equipamento?nome={{ nome }}&email={{ email }}&perfil={{ perfil }}">⚙️ Equipamentos Padrão</a></li>
+            <li><a href="/checklist?nome={{ nome }}&email={{ email }}&perfil={{ perfil }}">✅ Checklist</a></li>
+
+          {% elif perfil == "frota" %}
+            <li><a href="/frota?nome={{ nome }}&email={{ email }}&perfil={{ perfil }}">🚚 Minha Frota</a></li>
+            <li><a href="/frota_evento?nome={{ nome }}&email={{ email }}&perfil={{ perfil }}">🛣️ Frota Evento</a></li>
+    
+            <li><a href="/manutencao?nome={{ nome }}&email={{ email }}&perfil={{ perfil }}">🔧 Manutenção</a></li>
+            <li><a href="/inventario?nome={{ nome }}&email={{ email }}&perfil={{ perfil }}">📦 Inventário</a></li>
+          {% endif %}
+        </ul>
+      </nav>
+    </aside>
+
+    <main class="main-content">
+      <h1>📊 Dashboard</h1>
+
+      <div class="cards-container">
+        <div class="card">Eventos</div>
+        <div class="card">Equipamentos</div>
+        <div class="card">Checklist</div>
+        <div class="card">Manutenção</div>
+        <div class="card">Clientes</div>
+        <div class="card">Contratos</div>
+        <div class="card">Financeiro</div>
+        <div class="card">Funcionários</div>
+        <div class="card">Inventário</div>
+        <div class="card">Frota</div>
+      </div>
+
+      <p class="info-text">
+        Use o menu à esquerda para acessar os recursos do sistema.
+      </p>
+
+      {% if mensagem %}
+      <p style="margin-top: 20px; font-weight: 600; color: green;">{{ mensagem }}</p>
+      {% endif %}
+    </main>
+  </div>
+</body>
+</html>
