@@ -38,9 +38,14 @@ Este sistema visa facilitar o gerenciamento completo do processo de locação, i
 ## 👀 Imagens do Projeto  
 
 **Login ADM** - Acesso em todas páginas . 
-<img width="1337" height="653" alt="image" src="https://github.com/user-attachments/assets/41ab8207-02a8-4017-b732-bda14fa37b31" />
+<img width="1337" height="653" alt="image" src="https://github.com/user-attachments/assets/41ab8207-02a8-4017-b732-bda14fa37b31" /> 
+
 **Login Operacional**- Acesso ao cadastro de ativos e checklist 
-<img width="1351" height="569" alt="image" src="https://github.com/user-attachments/assets/e6075e18-5f50-4a4b-a4fb-e9be912ce77c" />
+<img width="1351" height="569" alt="image" src="https://github.com/user-attachments/assets/e6075e18-5f50-4a4b-a4fb-e9be912ce77c" /> 
+
+**Login Frota**- Acesso a cadastro de veículos e manutenção 
+<img width="1353" height="542" alt="image" src="https://github.com/user-attachments/assets/9b980765-a6c1-4bcd-beab-80a274c9588a" /> 
+
 
 
 ---
